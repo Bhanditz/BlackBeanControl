@@ -11,23 +11,25 @@ Before cloning/downloading the script, you should install all dependencies:
 Prerequisites for Linux users:
 
 - Install pip package: 
-  - wget https://bootstrap.pypa.io/get-pip.py 
-  - Run get-pip.py
-- Install python-dev package: apt-get install python-dev
+  - `wget https://bootstrap.pypa.io/get-pip.py`
+  - Run `get-pip.py`
+- Install python-dev package: `apt-get install python-dev`
 
 Prerequisites for Windows users:
 
 - Install Microsoft Visual C++ Compiler for Python 2.7
   - Download https://www.microsoft.com/en-us/download/details.aspx?id=44266
-  - Run VCforPython27.msi
+  - Run `VCforPython27.msi`
 
 Dependencies for Windows/Linux:
 
-- Install configparser package: python -m pip install configparser
-- Install netaddr package: python -m pip install netaddr
-- Install pycrypto package: python -m pip install pycrypto
+- Install configparser package: `python -m pip install configparser`
+- Install netaddr package: `python -m pip install netaddr`
+- Install pycrypto package: `python -m pip install pycrypto`
 - Download python-broadlink package - you can find it on the github by the package name (github user: mjg59)
-- Unzip it to some local folder and install it: setup.py install
+  - Unzip it to some local folder and install it: setup.py install
+- Install web.py package - see http://webpy.org/install
+  - `pip install web.py`
 
 Now you can clone/download BlackBeanControl (in case you download it as archive, unzip it to some local folder).
 
