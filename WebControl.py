@@ -35,7 +35,7 @@ class WebHook:
         DeviceName = input.device
 
         if DeviceName.strip() == '':
-            return 'Device name parameter is mandatory'
+            return 'ERROR: Device name parameter is mandatory'
 
         if SettingsFile.has_section(DeviceName.strip()):
             if SettingsFile.has_option(DeviceName.strip(), 'IPAddress'):
@@ -58,19 +58,19 @@ class WebHook:
             else:
                 DeviceTimeout = ''        
         else:
-            return 'Device does not exist in BlackBeanControl.ini'
+            return 'ERROR: Device does not exist in BlackBeanControl.ini'
 
         if (DeviceName.strip() != '') and (DeviceIPAddress.strip() == ''):
-            return 'IP address must exist in BlackBeanControl.ini for the selected device'
+            return 'ERROR: IP address must exist in BlackBeanControl.ini for the selected device'
 
         if (DeviceName.strip() != '') and (DevicePort.strip() == ''):
-            return 'Port must exist in BlackBeanControl.ini for the selected device'
+            return 'ERROR: Port must exist in BlackBeanControl.ini for the selected device'
 
         if (DeviceName.strip() != '') and (DeviceMACAddress.strip() == ''):
-            return 'MAC address must exist in BlackBeanControl.ini for the selected device'
+            return 'ERROR: MAC address must exist in BlackBeanControl.ini for the selected device'
 
         if (DeviceName.strip() != '') and (DeviceTimeout.strip() == ''):
-            return 'Timeout must exist in BlackBeanControl.ini for the selected device'
+            return 'ERROR: Timeout must exist in BlackBeanControl.ini for the selected device'
 
         if DeviceName.strip() != '':
             RealTimeout = DeviceTimeout.strip()
@@ -78,11 +78,9 @@ class WebHook:
             RealTimeout = Settings.Timeout
 
         if RealTimeout.strip() == '':
-            return 'Timeout must exist in BlackBeanControl.ini'
+            return 'ERROR: Timeout must exist in BlackBeanControl.ini'
         else:
             RealTimeout = int(RealTimeout.strip())
-
-        print("Device on IP %s:%s %s" % (DeviceIPAddress, DevicePort, DeviceMACAddress))
 
         ParsedMAC = netaddr.EUI(DeviceMACAddress)
         ParsedPort = int(DevicePort)
