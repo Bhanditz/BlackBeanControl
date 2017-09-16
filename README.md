@@ -1,6 +1,8 @@
-# BlackBeanControl - Broadlink RM 3 Mini (aka Black Bean) control script
+# BlackBeanControl - Broadlink RM 3 Mini (aka Black Bean) control script, with added HTTP control capability
 
 A simple Python 2 script, which uses python-broadlink package. It can be used for both, learning and sending IR commands
+
+Original script by davorf, HTTP control added by mattdy
 
 ### Installation
 
@@ -69,6 +71,15 @@ Parameters explanation:
 
 IP Address, Port, MAC Address and Timeout command line parameters can not be used separately.
 
+```
+WebControl.py -w <Port>
+```
+Parameters explanation:
+- Port - mandatory parameter. Specifies the port that the script will use to accept HTTP requests
+
+Usage:
+This script will accept requests on the specified port, with 2 parameters - `command` and `device`, which must match entries as in the parameters for `BlackBeanControl.py`. There is no option for key-ing IR data or manually specifying device details through this script
+
 ### Donations
 
 This script is available for free under the GPL license. If you use the script, and would like to donate, feel free to send any amount through paypal. 
@@ -76,6 +87,8 @@ This script is available for free under the GPL license. If you use the script, 
 Note: Since standard Donate option is not available on my PayPal account this is a workaround solution.
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=CCZRY3C8RXSRW&lc=BA&item_name=Donation%20%2d%20BlackBeanControl&item_number=1&button_subtype=services&currency_code=EUR&bn=PP%2dBuyNowBF%3abtn_paynowCC_LG%2egif%3aNonHosted)
+
+If you appreciate the HTTP control, please consider Bitcoin donations to `1B7F63ANk4BhiDA9afuub91xUHtDEQtGL4`
 
 ### License
 
