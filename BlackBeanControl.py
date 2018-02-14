@@ -8,6 +8,10 @@ import Settings
 from os import path
 from Crypto.Cipher import AES
 
+
+if sys.version_info[0] == 3:
+    import binascii
+
 SettingsFile = configparser.ConfigParser()
 SettingsFile.optionxform = str
 SettingsFile.read(Settings.BlackBeanControlSettings)
@@ -23,6 +27,21 @@ AlternativeIPAddress = ''
 AlternativePort = ''
 AlternativeMACAddress = ''
 AlternativeTimeout = ''
+
+
+def bytes2str(src):
+    # type: (bytes) -> Text
+    if sys.version_info[0] == 2:
+        return src
+    return src.decode('latin-1')
+
+
+def bytes2hex(src):
+    # type: (bytes) -> bytes
+    if sys.version_info[0] == 2:
+        return src.encode('hex')
+    return binascii.hexlify(src)
+
 
 try:
     Options, args = getopt.getopt(sys.argv[1:], 'c:d:r:i:p:m:t:h', ['command=','device=','rekey=','ipaddress=','port=','macaddress=','timeout=','help'])
@@ -200,7 +219,7 @@ else:
         print('Command not received')
         sys.exit()
 
-    EncodedCommand = LearnedCommand.encode('hex')
+    EncodedCommand = bytes2str(bytes2hex(LearnedCommand))
 
     BlackBeanControlIniFile = open(path.join(Settings.ApplicationDir, 'BlackBeanControl.ini'), 'w')    
     SettingsFile.set('Commands', SentCommand, EncodedCommand)
