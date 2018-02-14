@@ -9,9 +9,6 @@ from os import path
 from Crypto.Cipher import AES
 
 
-if sys.version_info[0] == 3:
-    import binascii
-
 SettingsFile = configparser.ConfigParser()
 SettingsFile.optionxform = str
 SettingsFile.read(Settings.BlackBeanControlSettings)
@@ -40,7 +37,16 @@ def bytes2hex(src):
     # type: (bytes) -> bytes
     if sys.version_info[0] == 2:
         return src.encode('hex')
-    return binascii.hexlify(src)
+    _src = src.encode('latin-1') if isinstance(src, str) else src
+    return binascii.hexlify(_src)
+
+
+def hex2bytes(src):
+    # type: (bytes) -> bytes
+    if sys.version_info[0] == 2:
+        return src.decode('hex')
+    _src = src.encode('latin-1') if isinstance(src, str) else src
+    return binascii.unhexlify(_src)
 
 
 try:
@@ -208,7 +214,7 @@ else:
     CommandFromSettings = ''
 
 if CommandFromSettings.strip() != '':
-    DecodedCommand = CommandFromSettings.decode('hex')
+    DecodedCommand = hex2bytes(CommandFromSettings)
     RM3Device.send_data(DecodedCommand)
 else:
     RM3Device.enter_learning()
